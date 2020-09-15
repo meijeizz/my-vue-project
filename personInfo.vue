@@ -601,7 +601,7 @@
                            :total="total">
             </el-pagination>&ndash;&gt;
         </div>-->
-        <div class="tableG" >
+        <div class="tableG"  v-if="showPrise">
           <table border="1px">
 
             <tr style="background-color: #B3C0D1">
@@ -624,35 +624,56 @@
           </table>
 
         </div>
+<!--        岗位详情-->
+        <div  v-show="showRentPrise">
+          <el-table
+            :data="tableHHData"
+            :span-method="objectSpanMethod"
+            border
+            :height="tableT"
+            :header-cell-style="tableHeaderColor"
+            style="width: 100%">
+            <el-table-column
+              prop="date"
+              label="招聘岗位"
+              width="100">
+            </el-table-column>
+            <el-table-column
+              prop="name"
+              label="报名基本条件"
+              width="180">
+            </el-table-column>
+            <el-table-column
+              prop="address"
+              label="岗位能力要求"
+            width="900">
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button>
+                  <el-link href="#java" target="_blank">申请</el-link>
+                </el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
 <!--      协议弹窗-->
       <div class="diacolor">
       <el-dialog title="应聘须知" :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
         <div style="height:300px" >
         <div class="textx">
-          1.政治立场坚定，热爱党的新闻事业。<br>
-
-2.具有较高政策水平，对社会洞察深刻，在业界具有较高的知名度和影响力。<br>
-
-3.具有全日制硕士研究生及以上学历。<br>
-
-4.年龄在35周岁以内。<br>
-
-5.具有主创的省新闻奖以上的作品或公认相当水平的作品。<br>
-
-6.身体健康，具有较强的抗压能力。<br>
-
-7.特别优秀者，条件可适当放宽。
+          <h5 id="h5--"><a name="请详细阅读以下通知，点击确定表示认同此通知且满足要求" class="reference-link"></a><span class="header-link octicon octicon-link"></span>请详细阅读以下通知，点击确定表示认同此通知且满足要求</h5><p><strong>1</strong>.政治立场坚定，热爱党的新闻事业。</p> <p><strong>2</strong>.具有较高政策水平，对社会洞察深刻，在业界具有较高的知名度和影响力。</p> <p><strong>3</strong>.具有全日制硕士研究生及以上学历。</p> <p><strong>4</strong>.年龄在35周岁以内。</p> <p><strong>5</strong>.具有主创的省新闻奖以上的作品或公认相当水平的作品。</p> <p><strong>6</strong>.身体健康，具有较强的抗压能力。</p> <p><strong>7</strong>.特别优秀者，条件可适当放宽。</p>
 
         </div>
         </div>
           <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="jump()" >确定 </el-button>
+    <el-button type="primary" @click="showToggle()" >我已详细阅读 </el-button>
   </span>
-
       </el-dialog>
       </div>
+
 <!--     弹出 详情-->
       <div style="clear: both"></div>
 <!--岗位要则-->
@@ -1048,6 +1069,8 @@ export default {
     name: "personnelInfo",
     data() {
         return {
+            showPrise:true,//设置显示
+            showRentPrise:false,//设置隐藏
             dialogVisible: false,
             activeIndex: '1',
             activeIndex2: '1',
@@ -1208,6 +1231,7 @@ export default {
                 summary: "通过了这一次的支教活动自己学到了很多的东西。。。"
             }],
             tableH: 500,
+            tableT:600,
 
             eduAdd: false,//学历信息新增弹框
             awardAdd: false,//奖励信息新增弹框
@@ -1267,7 +1291,64 @@ export default {
                 {name: "阿昌族"}, {name: "普米族"}, {name: "塔吉克族"}, {name: "怒族"}, {name: "乌孜别克族"},
                 {name: "俄罗斯族"}, {name: "鄂温克族"}, {name: "德昂族"}, {name: "保安族"}, {name: "裕固族"}, {name: "京族"},
                 {name: "塔塔尔族"}, {name: "独龙族"}, {name: "鄂伦春族"}, {name: "赫哲族"}, {name: "门巴族"}, {name: "珞巴族"}, {name: "基诺族"}],
-            polityList: [{name: "党员"}, {name: "团员"}, {name: "普通群众"}]
+            polityList: [{name: "党员"}, {name: "团员"}, {name: "普通群众"}],
+            tableHHData: [{
+                id: 1,
+                date: '记者',
+                name: '1、 热爱党的新闻舆论工作，综合素质好，身体健康，具有强烈事业心、责任感，有良好职业道德。\n' +
+                    '\n' +
+                    '2、具有全日制硕士研究生及以上学历（含2019年应届毕业生，其中Android、iOS、PHP工程师、三维动画师、动捕导演具有全日制大学本科及以上学历）。\n' +
+                    '\n' +
+                    '3、年龄在28周岁以内（1990年10月以后出生，有媒体工作经历可适当放宽至30周岁以内）。\n' +
+                    '\n' +
+                    '4、具有良好的合作沟通意识、组织协调能力，适应全天候工作状态。\n' +
+                    '\n' +
+                    '5、优秀人才适当放宽条件。',
+                address: '具有较强的社会责任感、敏感的新闻发现与采访能力，有较强的文字表达能力，能熟练运用文字、图片、直播、音频、视频等全媒体报道手段，英语熟练者优先。'
+            }, {
+                id: 2,
+                date: '微信编导',
+                name: '',
+                address: '有扎实的文字功底，有良好的网络阅读习惯，善于发现选题，能迅速捕获热点事件，熟练使用网络用语；掌握Photoshop、GifCam等软件；有长期运营10万以上粉丝的微信公众号经验者优先'
+            }, {
+                id: 3,
+
+                date: '新闻主播',
+                name: '',
+                address: '外貌端正，普通话一级乙等以上水平；有新闻敏感性，有较好的采写能力、控场能力，熟悉网络直播；能按照策划进行采访，能主持自制深度新闻节目，完成节目脚本撰写；能胜任高强度工作，有较强的团队意识'
+            }, {
+                id: 4,
+                date: '视频编导',
+                name: '',
+                address: '有独立执导的经验，精通剪辑，有成熟的作品（专题片、广告片、宣传片、微电影等）；能参与创意策划，能对拍摄对象进行深入采访，可以独立完成分镜头脚本；能完成拍摄现场场面调度，有较出色的现场导演能力；后期制作期间，能对剪辑、包装、音乐、调色等工作进行指导和调整； 具有较强的团队意识和团队管理能力'
+            },
+                {
+                    id: 5,
+
+                    date: '音乐编辑',
+                    name: '',
+                    address: '具备较丰富的音乐编辑工作经验，具备良好的音乐素养和视听语言基础，能熟练使用Audition、Cubase、Logic 、Protools等音频编辑软件；能根据视频节目要求完成节目的配乐工作，对复杂的工程有整体音乐设计；能熟练使用各类录音收音设备，辅助视频拍摄完成声音录制；音乐类相关专业，能进行原创编曲的优先考虑'
+                }, {
+
+                    date: '三维动画师',
+                    name: '',
+                    address: '对短视频和新闻行业有兴趣，有个人作品；有动画设计及制作经验，熟悉动画制作的所有环节，熟练使用3D制作软件；能够上夜班，接受较灵活的上下班和轮班时间'
+                }, {
+
+                    date: 'Android工程师',
+                    name: '',
+                    address: '具有扎实的Java基础，1年以上Android开发经验；熟悉Android SDK及相关开发、调试、优化工具；熟练掌握Android的API，理解Android体系结构、后台服务、数据存储等原理；熟练掌握Android UI开发；掌握HTTP、TCP/IP、socket等网络通信编程技术；熟悉xml/json等数据格式解析；有良好的沟通及团队合作能力'
+                }, {
+
+                    date: 'IOS工程师',
+                    name: '',
+                    address: '：精通Objective-C编程，能独立完成IOS系统相关功能模块的开发，并保证模块质量；有iOS SDK开发经验，具备主流开源组件使用经验，熟悉常用算法和数据结构，熟悉网络编程、异步编程技术、熟悉xml/json数据的解析；精通UI控件、视频控件使用、开发和优化；掌握系统（缓存、重构等）优化，熟悉软件开发流程，能自觉按较规范的软件管理流程进行开发；具备团队协作和组织能力，有强烈团队精神；有iOS市场上线作品者优先。'
+                }],
+            detailData: [{
+                name: "1、负责所在团队软件产品的销售及推广；2、根据市场营销计划，完成部门销售指标；3、开拓新市场,发展新客户,增加产品销售范围；4、负责客户信息的采集、跟踪与销售推进，完成销售任务",
+                tel: "12345678901",
+                address: "长城汇"
+            }],
         }
     },
     created() {
@@ -1425,6 +1506,28 @@ export default {
                 })
                 .catch(_ => {});
         },
+        objectSpanMethod({row, column, rowIndex, columnIndex}) {
+            if (columnIndex === 1) {
+                if (rowIndex % 8 === 0) {
+                    return {
+                        rowspan: 8,
+                        colspan: 1
+                    };
+                } else {
+                    return {
+                        rowspan: 0,
+                        colspan: 0
+                    };
+                }
+            }
+        },
+        showToggle(){
+
+                this.showPrise = false;
+                this.showRentPrise=true;
+                this.dialogVisible = false
+                },
+
 
 
         // 调用
@@ -1748,7 +1851,7 @@ export default {
   .bottom {
     width: 100%;
     position: relative;
-    top: 130px;
+    top: 170px;
     left: -8px;
   }
   /*menu的表头*/
@@ -1800,11 +1903,11 @@ export default {
   }
 /*新增弹窗确定文字*/
 .textx{
-  font-size: 25px;
+  font-size: 17px;
   text-align: left;
-  margin-left: 150px;
+  margin-left: 190px;
   color: rgba(44, 62, 80, 0.79);
-  line-height:40px;
+  /*line-height:40px;*/
 }
 
 

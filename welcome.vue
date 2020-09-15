@@ -1,5 +1,4 @@
 <template>
-
   <div class="main-background"><!--整个页面的属性-->
     <div class="heada">
       <div class="imga"><!--设置置顶LOGO-->
@@ -13,9 +12,10 @@
       <!--顶部的面包屑-->
 <div class="head_B">
 
-        <el-breadcrumb-item :to="{path: '#Q' }" >招聘首页 &nbsp;&nbsp;&nbsp;</el-breadcrumb-item>
-        <el-breadcrumb-item :to="{path:'#c'}"><div class="footer"   @click="returnTop2"> 招聘公告 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></el-breadcrumb-item>
-        <el-breadcrumb-item :to="{path:'#b'}"><div class="footer" @click="returnTop1"  > 岗位详情&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></el-breadcrumb-item>
+        <el-breadcrumb-item :to="{path: '/' }" >招聘首页 &nbsp;&nbsp;&nbsp;</el-breadcrumb-item>
+  <el-breadcrumb-item :to="{path:'#h'}"><div class="footer" @click="returnTop3"> 招聘公告 &nbsp;&nbsp;&nbsp;&nbsp;</div> </el-breadcrumb-item>
+        <el-breadcrumb-item :to="{path:'#c'}"><div class="footer"   @click="returnTop2"> 岗位详情 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></el-breadcrumb-item>
+        <el-breadcrumb-item :to="{path:'#b'}"><div class="footer" @click="returnTop1"  > 岗位职责&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div></el-breadcrumb-item>
         <el-breadcrumb-item :to="{path:'#a'}"><div class="footer" @click="returnTop">联系我们</div> </el-breadcrumb-item>
   <el-breadcrumb-item :to="{path:'#a'}"> </el-breadcrumb-item>
 </div>
@@ -31,9 +31,17 @@
         </el-carousel-item>
       </el-carousel>
     </div>
+    <div class="textrr" id="h">
+      <h1 class="el-icon-s-promotion">招聘公告:</h1>
+    </div>
+    <div class="recruitment">
+      <div class="xtext">
+        <p>因事业发展需要，长江日报报业集团面向社会招聘评论员若干名。现将有关情况公告如下：</p> <h2 id="h2--"><a name="一、 招聘条件" class="reference-link"></a><span class="header-link octicon octicon-link"></span>一、 招聘条件</h2><p>1.政治立场坚定，政治敏锐性强。</p> <p>2.热爱党的新闻事业，有较强理论功底。</p> <p>3.中共党员，具有全日制硕士研究生及以上学历。</p> <p>4.年龄在35周岁以下，有3年以上工作经历。</p> <p>5.具有正式出版报刊或正式出版报刊所办新媒体上发表的原创评论作品，作品获市级及以上新闻奖者优先。</p> <p>6.身体健康，具有较强抗压能力。</p> <p>7.特别优秀者，条件可适当放宽。</p> <h2 id="h2--"><a name="二、报名方式" class="reference-link"></a><span class="header-link octicon octicon-link"></span>二、报名方式</h2><p>1.在长江网下载《长江日报报业集团评论员招聘报名登记表》并按要求填写，</p> <p>提供个人基本材料(个人简历、学历、学位、近期免冠登记照、工作经历等证明)及代表作品，</p> <p>发送至邮箱：<a href="mailto:cjrbrsb@163.com">cjrbrsb@163.com</a>，也可邮寄至武汉市江岸区金桥大道113号长江传媒大厦长江日报报业人事部收。</p> <p>2.报名截止时间：2020年6月15日，面试及考试时间另行通知。</p> <p>3.联系电话：85693188</p> <p>长江日报报业集团</p> <p>2020年6月1日</p>
+      </div>
+    </div>
     <!--    左侧的招聘公告-->
     <div class="textr" id="a">
-      <h1 class="el-icon-s-promotion">招聘公告:</h1>
+      <h1 class="el-icon-s-promotion">岗位详情:</h1>
     </div>
     <!--    招聘公告的主要内容-->
     <div class="commenta">
@@ -42,7 +50,6 @@
         :span-method="objectSpanMethod"
         border
         style="width: 100%">
-
         <el-table-column
           prop="date"
           label="招聘岗位"
@@ -60,15 +67,12 @@
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button>
-              <el-link href="javascript: " target="_blank">申请</el-link>
+              <el-link href="#java" target="_blank">申请</el-link>
             </el-button>
-            <el-button @click="detail=true">详情</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
-
-
     <div style="clear: both"></div>
     <!--详细弹窗-->
     <el-dialog :title="title" :visible.sync="detail" style="font-size: 16px;" width="800px; ">
@@ -96,13 +100,11 @@
     </el-dialog>
     <!--    岗位详情文字-->
     <div class="textq" >
-      <h1 class="el-icon-s-grid"> 岗位详情:</h1>
+      <h1 class="el-icon-s-grid"> 岗位职责:</h1>
     </div>
     <!--    卡片-->
     <div class="card" id="b">
-
       <tr>
-
         <td>
           <el-card class="box-card">
             <div slot="header" class="clearfix">
@@ -141,10 +143,7 @@
         </td>
       </tr>
       <tr>
-
-
       </tr>
-
     </div>
     <!--底部信息-->
     <div class="bottoma" id="c">
@@ -160,7 +159,9 @@
         邮 &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;编：430015<br>
       </div>
     </div>
+    <el-backtop>top</el-backtop>
   </div>
+
 </template>
 <script>
     import ElementUI from "element-ui";
@@ -176,7 +177,7 @@
                 currentDate: new Date(),
                 password: "",
                 idCard: "",
-                tableData: [{
+                tableHHData: [{
                     id: 1,
                     date: '记者',
                     name: '1、 热爱党的新闻舆论工作，综合素质好，身体健康，具有强烈事业心、责任感，有良好职业道德。\n' +
@@ -245,6 +246,9 @@
             },
             returnTop2:function(){
                 document.querySelector("#a").scrollIntoView(true);
+            },
+            returnTop3:function(){
+                document.querySelector("#h").scrollIntoView(true);
             },
             login() {
                 var self = this;
@@ -356,7 +360,6 @@
     background-color: white;
     position: absolute;
     top: 0px;
-
   }
 
   /*头部面包屑*/
@@ -366,18 +369,67 @@
     left: 600px;
   }
 
+  /*招聘公告*/
+  .recruitment{
+    width: 60%;
+    height: 800px;
+    position: absolute;
+    top: 400px;
+    left: 300px;
+    background-color: #f5f7fa;
+    background-size: cover;
+    color: black;
+    border-top:  40px solid #b3c0d1;
+  }
+  /*招聘公告内容*/
+  .xtext{
+    text-align: left;
+    position: absolute;
+    left: 200px;
+  }
+  /*招聘公告左侧图标*/
+  .textrr {
+    position: absolute;
+    top: 370px;
+    left: 100px;
+    color: rgba(68, 26, 87, 0.6);
+    border-bottom:  2px solid rgba(112, 112, 112, 0.87);
+
+  }
+  /*岗位详情的左侧图标*/
+  .textr {
+    position: absolute;
+    top: 1240px;
+    left: 100px;
+    color: rgba(68, 26, 87, 0.6);
+    border-bottom:  2px solid rgba(112, 112, 112, 0.87);
+
+  }
+  /*岗位详情*/
+  .commenta {
+    width: 78%;
+    height: 400px;
+    position: absolute;
+    top: 1280px;
+    left: 300px;
+    background-color: rgba(175, 172, 167, 0.22);
+    background-size: cover;
+    text-align: left;
+    color: black;
+    border-top:  40px solid #b3c0d1;
+  }
   /*显示卡片*/
   .card {
     position: absolute;
-    top: 1630px;
+    top: 2530px;
     left: 300px;
     border-top:  40px solid #b3c0d1;
   }
 
-  /*岗位详情*/
+  /*岗位职责Card*/
   .textq {
     position: absolute;
-    top: 1570px;
+    top: 2490px;
     left: 100px;
     color: rgba(68, 26, 87, 0.6);
     border-bottom:  2px solid rgba(112, 112, 112, 0.87);
@@ -392,7 +444,7 @@
     border-bottom:  2px solid rgba(112, 112, 112, 0.87);
     margin: 0 20px 0 0;
   }
-
+  /*联系我们的内容*/
   .texte {
     position: absolute;
     top: 50px;
@@ -400,34 +452,13 @@
     color: rgba(13, 33, 11, 0.94);
     text-align: left;
   }
-  /*招聘公告*/
-  .textr {
-    position: absolute;
-    top: 380px;
-    left: 100px;
-    color: rgba(68, 26, 87, 0.6);
-    border-bottom:  2px solid rgba(112, 112, 112, 0.87);
 
-  }
-  /*招聘公告*/
-  .commenta {
-    width: 78%;
-    height: 400px;
-    position: absolute;
-    top: 420px;
-    left: 300px;
-    background-color: rgba(175, 172, 167, 0.22);
-    background-size: cover;
-    text-align: left;
-    color: black;
-    border-top:  40px solid #b3c0d1;
-  }
   /*底部信息*/
   .bottoma {
     width: 100%;
     height: 200px;
     position: absolute;
-    top: 1970px;
+    top: 2870px;
     left: 0px;
     background-color: rgba(175, 172, 167, 0.22);
     background-size: cover;
@@ -518,4 +549,6 @@
   .box-card {
     width: 480px;
   }
+
+
 </style>
